@@ -9,7 +9,7 @@
 - Все данные в MySQL, таблицы приложил.
 - Есть команда для админов `/reloadwarehouses` (релоадит конфиги без рестарта).
 
-## Как это выглядит:
+## Как выглядит:
 ![Screen 1](screenshots/location.png)
 ![Screen 2](screenshots/management.png)
 ![Screen 3](screenshots/inventory.png)
