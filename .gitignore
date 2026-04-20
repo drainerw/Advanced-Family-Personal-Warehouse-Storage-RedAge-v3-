@@ -1,0 +1,36 @@
+# .NET
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+.env
+
+# General
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
+Files/dotnet/bin/
+Files/dotnet/obj/
+Files/src_cef/node_modules/
+Files/src_cef/dist/

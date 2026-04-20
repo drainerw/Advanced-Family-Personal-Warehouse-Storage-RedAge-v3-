@@ -1,0 +1,1 @@
+Файл **warehouse.js** кинуть по пути - src_client\player 

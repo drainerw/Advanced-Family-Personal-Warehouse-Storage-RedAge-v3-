@@ -1,0 +1,14 @@
+В : src_cef/src/App.svelte
+
+<!-- 1. Ищем блок импортов (обычно в начале файла) -->
+
+import PlayerWarehouse from '@/views/player/warehouse/index.svelte';
+
+<!-- 2. Ищем объект const Views (в котором перечислены все страницы) -->
+
+const Views = {
+    // ...
+    PlayerWarehouse,
+}
+
+

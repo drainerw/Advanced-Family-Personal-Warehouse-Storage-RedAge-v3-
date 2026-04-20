@@ -1,0 +1,8 @@
+<!-- Ищем import PlayerRestart from '@/views/player/restart/index.svelte'; и снизу добавляем  -->
+
+import PlayerWarehouse from '@/views/player/warehouse/index.svelte';
+
+
+<!-- Ищем PlayerRestart, --> и снизу добавляем
+PlayerWarehouse,
+
