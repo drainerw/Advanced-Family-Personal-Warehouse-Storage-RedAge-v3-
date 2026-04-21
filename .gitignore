@@ -34,3 +34,6 @@ Files/dotnet/bin/
 Files/dotnet/obj/
 Files/src_cef/node_modules/
 Files/src_cef/dist/
+
+# Scratch artifacts
+scratch/
