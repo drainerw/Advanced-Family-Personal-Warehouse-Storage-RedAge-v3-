@@ -1,0 +1,72 @@
+<!--fix bug Getting stuck in the warehouse on the way out -->
+<!--Исправление ошибки: застревание в складе при выходе -->
+
+Files dotnet\resources\NeptuneEvo\Warehouses\WarehouseManager.cs
+<!--Ищем private const uint baseDimension = 10000; выделяем и снизу добавляем  -->
+
+public const uint baseDimension = 10000;
+        
+        public static void Event_OnPlayerDisconnected(ExtPlayer player)
+        {
+            try
+            {
+                var characterData = player.GetCharacterData();
+                if (characterData == null) return;
+                
+                if (player.Dimension >= baseDimension)
+                {
+                    int unitId = (int)(player.Dimension - baseDimension);
+                    if (Units.ContainsKey(unitId))
+                    {
+                        var unit = Units[unitId];
+                        var building = Warehouses.FirstOrDefault(w => w.Id == unit.WarehouseId);
+                        if (building != null)
+                        {
+                            characterData.CurPosition = building.Position;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Write($"Event_OnPlayerDisconnected Exception: {e.ToString()}");
+            }
+        }
+
+        public static void Event_OnPlayerSpawn(ExtPlayer player)
+        {
+            try
+            {
+                var characterData = player.GetCharacterData();
+                if (characterData == null) return;
+
+                if (player.Dimension == 0 && player.Position.DistanceTo(ExitPosition) < 50f)
+                {
+                    var building = Warehouses.FirstOrDefault();
+                    if (building != null)
+                    {
+                        player.Position = building.Position;
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, "Вы были выведены из склада", 3000); 
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Write($"Event_OnPlayerSpawn Exception: {e.ToString()}");
+            }
+        }
+
+
+Files - dotnet\resources\NeptuneEvo\Players\Disconnect\Repository.cs
+<!--Ищем using NeptuneEvo.Fractions.LSNews; снизу добавляем  -->
+using NeptuneEvo.Warehouses;
+
+<!--Ищем PedSystem.LivingCity.Repository.OnPlayerDisconnect(player); снизу добавляем  --> 240 сторка
+WarehouseManager.Event_OnPlayerDisconnected(player);
+
+Files dotnet\resources\NeptuneEvo\Main.cs
+<!--Ищем using Org.BouncyCastle.Asn1.X509; снизу добавляем  -->
+using NeptuneEvo.Warehouses;
+
+<!--Ищем ClothesComponents.UpdateClothes(player); снизу добавляем  --> 1381 сторка
+                WarehouseManager.Event_OnPlayerSpawn(player);
